@@ -1,0 +1,31 @@
+
+    <table class = "table table-striped result-list">
+        <tr>
+            <th>日期</th>
+            <th>发票数量</th>
+            <th>总额</th>
+            <th>修改</th>
+            <th>删除</th>
+        </tr>
+        {% for table in baoxiao_tables %}
+        <tr iid = {{table.id}}>
+            <td>{{table.date|date:'Y-m-j'}}</td>
+            <td>{{table.total_bills}}</td>
+            <td>{{table.total_money}}</td>
+            <td>
+                {% if table.have_payed or table.have_accepted %}
+                不可修改
+                {% else %}
+                <a class='btn btn-primary' href="{% url detail_table table.id%}">修改</a>
+                {% endif %}
+            </td>
+            <td>
+                {% if table.have_payed or table.have_accepted %}
+                不可修改
+                {% else %}
+                <button class='btn btn-primary delect-btn'>删除</button>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
